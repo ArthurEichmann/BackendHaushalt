@@ -7,6 +7,7 @@ const Costs = require('../models/Costs')
 router.get('/', async (request,response) => {
     try {
         const costs = await Costs.find();
+        response.header('Access-Control-Allow-Origin', '*');
         response.json(costs);
     }catch(err){
         response.json({ message: err });
@@ -23,6 +24,7 @@ router.post('/', async (request, response) => {
     });
     try {
         const savedCost = await costs.save()
+        response.header('Access-Control-Allow-Origin', '*');
         response.json(savedCost);
     }catch(err){
         response.json({ message: err });
@@ -32,7 +34,8 @@ router.post('/', async (request, response) => {
 //get a specific post
 router.get('/:costsId', async (request, response) => {
     try {
-    const costs = await Costs.findById(request.params.postId);
+        const costs = await Costs.findById(request.params.costsId);
+        response.header('Access-Control-Allow-Origin', '*');
         response.json(costs);
     }catch(err){
         response.json({ message: err });
@@ -52,6 +55,7 @@ router.delete('/:costsId', async (request, response) => {
 //Update a post
 router.patch('/:costsId', async (request, response) => {
     try {
+        console.log("this is a test")
         const updatedCost = await Costs.updateOne(
             {_id: request.params.postId},
             { $set: {
@@ -61,6 +65,7 @@ router.patch('/:costsId', async (request, response) => {
                 date: request.body.date
             }}
         );
+        response.header('Access-Control-Allow-Origin', '*');
         response.json(updatedCost);
     }catch(err){
         response.json({ message: err });

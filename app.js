@@ -20,7 +20,7 @@ app.use('/counters', countersRoute);
 mongoose.connect(
     process.env.DB_CONNECTION,
     { useNewUrlParser: true },
-    () => console.log('======= connected to db ========')
+    () => console.log('======= connected to db, live on port 8000 ========')
 );
 
 //How do we start Listening to the server
